@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concours National — Master 2 Data Science & IA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #070b14;
+  --bg2: #0d1426;
+  --card: #111827;
+  --card2: #162035;
+  --gold: #c9a84c;
+  --gold-l: #e8c96d;
+  --gold-dim: rgba(201,168,76,0.12);
+  --blue: #4a9eff;
+  --blue-dim: rgba(74,158,255,0.1);
+  --violet: #a78bfa;
+  --green: #34d399;
+  --red: #f87171;
+  --amber: #fbbf24;
+  --t1: #e8e4d9;
+  --t2: #9ca3af;
+  --t3: #6b7280;
+  --border: rgba(201,168,76,0.18);
+  --border2: rgba(255,255,255,0.06);
+  --r: 12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--bg);
+  color:var(--t1);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 10% 10%, rgba(201,168,76,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 90% 90%, rgba(74,158,255,0.05) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.012'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
+
+/* ─── SCREEN SYSTEM ─── */
+.screen{display:none;position:relative;z-index:1;}
+.screen.active{display:block;animation:fadeSlideIn .5s ease;}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* ─── SHARED ─── */
+.gold-text{
+  background:linear-gradient(135deg,var(--gold),var(--gold-l));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+}
+.badge-gold{background:var(--gold-dim);color:var(--gold);border:1px solid rgba(201,168,76,0.3);}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:13px 28px;border-radius:var(--r);font-family:'Outfit',sans-serif;
+  font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s;border:none;
+}
+.btn-primary{
+  background:linear-gradient(135deg,#b8962e,var(--gold));color:#070b14;
+  box-shadow:0 4px 20px rgba(201,168,76,0.3);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,168,76,0.4);}
+.btn-ghost{background:transparent;color:var(--t2);border:1px solid var(--border2);}
+.btn-ghost:hover{background:var(--card);color:var(--t1);border-color:var(--border);}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important;}
+input,select{
+  width:100%;padding:12px 16px;border-radius:var(--r);
+  background:var(--card2);border:1px solid var(--border2);
+  color:var(--t1);font-family:'Outfit',sans-serif;font-size:.95rem;
+  transition:border-color .2s;outline:none;
+}
+input:focus,select:focus{border-color:var(--gold);}
+input::placeholder{color:var(--t3);}
+select option{background:var(--card);}
+label{display:block;font-size:.8rem;font-weight:600;color:var(--t2);margin-bottom:6px;letter-spacing:.03em;text-transform:uppercase;}
+
+/* ─── LANDING ─── */
+.landing-wrap{max-width:900px;margin:0 auto;padding:40px 24px 80px;}
+.landing-top{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 0 40px;border-bottom:1px solid var(--border2);margin-bottom:50px;
+}
+.logo-mark{
+  display:flex;align-items:center;gap:12px;
+}
+.logo-hex{
+  width:42px;height:42px;
+  background:linear-gradient(135deg,var(--gold),#b8962e);
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:1.1rem;color:#070b14;
+}
+.logo-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;letter-spacing:.05em;}
+.landing-year{font-size:.8rem;color:var(--t3);font-weight:500;}
+
+.landing-hero{text-align:center;margin-bottom:60px;}
+.landing-hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,5vw,3.4rem);font-weight:600;line-height:1.15;
+  margin-bottom:20px;
+}
+.landing-hero p{font-size:1.05rem;color:var(--t2);line-height:1.7;max-width:580px;margin:0 auto 28px;}
+.hero-stats{
+  display:flex;align-items:center;justify-content:center;gap:32px;
+  flex-wrap:wrap;margin-top:36px;
+}
+.hero-stat{text-align:center;}
+.hero-stat .val{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;}
+.hero-stat .lbl{font-size:.75rem;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+
+.info-card{
+  background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:36px;
+  margin-bottom:32px;
+}
+.info-card h2{
+  font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin-bottom:8px;
+}
+.info-card p{color:var(--t2);font-size:.9rem;line-height:1.6;margin-bottom:24px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{margin-bottom:0;}
+.form-group.full{grid-column:1/-1;}
+
+.rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:24px;}
+.rule-item{
+  background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:16px;
+  display:flex;align-items:flex-start;gap:12px;
+}
+.rule-icon{font-size:1.3rem;flex-shrink:0;}
+.rule-text strong{display:block;font-size:.85rem;font-weight:600;margin-bottom:2px;}
+.rule-text span{font-size:.78rem;color:var(--t3);}
+
+.sections-preview{display:flex;flex-direction:column;gap:10px;margin-top:24px;}
+.section-preview-item{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg2);border:1px solid var(--border2);border-radius:8px;padding:12px 16px;
+}
+.section-preview-left{display:flex;align-items:center;gap:12px;}
+.section-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.section-preview-name{font-size:.9rem;font-weight:500;}
+.section-preview-meta{font-size:.8rem;color:var(--t3);}
+.section-preview-pts{font-size:.8rem;color:var(--gold);font-weight:600;}
+
+.start-area{text-align:center;padding:16px 0;}
+.start-area p{font-size:.82rem;color:var(--t3);margin-top:12px;}
+
+/* ─── TEST SCREEN ─── */
+.test-header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(7,11,20,0.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border2);
+  padding:0 24px;
+}
+.test-header-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  height:60px;gap:16px;
+}
+.test-logo{
+  display:flex;align-items:center;gap:10px;flex-shrink:0;
+}
+.test-logo .logo-hex{width:32px;height:32px;font-size:.85rem;}
+.test-logo .logo-name{font-size:1.1rem;}
+
+.global-progress{flex:1;max-width:300px;}
+.gp-top{display:flex;justify-content:space-between;font-size:.72rem;color:var(--t3);margin-bottom:5px;}
+.gp-bar{height:4px;background:var(--bg2);border-radius:2px;overflow:hidden;}
+.gp-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--blue));border-radius:2px;transition:width .4s;}
+
+.timer-block{
+  display:flex;align-items:center;gap:8px;
+  background:var(--card);border:1px solid var(--border2);border-radius:8px;
+  padding:8px 14px;flex-shrink:0;
+}
+.timer-icon{font-size:.9rem;}
+.timer-value{font-family:'Outfit',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.04em;}
+.timer-block.danger{border-color:rgba(248,113,113,0.4);background:rgba(248,113,113,0.08);}
+.timer-block.danger .timer-value{color:var(--red);animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+/* ─── SECTION TABS ─── */
+.section-tabs-wrap{background:var(--bg2);border-bottom:1px solid var(--border2);}
+.section-tabs{
+  max-width:1100px;margin:0 auto;
+  display:flex;overflow-x:auto;padding:0 24px;
+  scrollbar-width:none;
+}
+.section-tabs::-webkit-scrollbar{display:none;}
+.sec-tab{
+  display:flex;align-items:center;gap:8px;
+  padding:14px 18px;font-size:.82rem;font-weight:600;
+  color:var(--t3);cursor:pointer;border-bottom:2px solid transparent;
+  white-space:nowrap;transition:all .2s;flex-shrink:0;
+}
+.sec-tab:hover{color:var(--t1);}
+.sec-tab.active{color:var(--t1);border-bottom-color:var(--gold);}
+.sec-tab.done{color:var(--gold);}
+.sec-tab-num{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--bg);font-size:.7rem;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border2);
+}
+.sec-tab.active .sec-tab-num{background:var(--gold-dim);border-color:var(--gold);color:var(--gold);}
+.sec-tab.done .sec-tab-num{background:rgba(52,211,153,0.15);border-color:var(--green);color:var(--green);}
+
+/* ─── QUESTION AREA ─── */
+.test-body{max-width:1100px;margin:0 auto;padding:32px 24px 120px;display:grid;grid-template-columns:1fr 280px;gap:32px;}
+@media(max-width:800px){.test-body{grid-template-columns:1fr;}}
+
+.question-panel{min-width:0;}
+.q-header{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;
+}
+.q-breadcrumb{font-size:.8rem;color:var(--t3);}
+.q-counter{
+  font-size:.82rem;color:var(--t2);
+  background:var(--card);padding:4px 12px;border-radius:20px;border:1px solid var(--border2);
+}
+.q-section-label{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;
+  padding:4px 12px;border-radius:20px;margin-bottom:16px;
+}
+
+.q-card{
+  background:var(--card);border:1px solid var(--border2);border-radius:16px;
+  padding:32px;margin-bottom:20px;
+  transition:border-color .3s;
+}
+.q-card:hover{border-color:var(--border);}
+.q-number{
+  font-size:.78rem;color:var(--t3);text-transform:uppercase;
+  letter-spacing:.06em;margin-bottom:12px;font-weight:600;
+}
+.q-text{
+  font-size:1.05rem;line-height:1.7;margin-bottom:24px;
+  font-weight:400;
+}
+.q-text code{
+  background:var(--bg2);padding:2px 8px;border-radius:4px;
+  font-family:'Courier New',monospace;font-size:.85em;color:var(--blue);
+  border:1px solid var(--border2);
+}
+.q-code-block{
+  background:var(--bg);border:1px solid var(--border2);border-radius:8px;
+  padding:16px;margin:12px 0 20px;font-family:'Courier New',monospace;
+  font-size:.85rem;color:#a5f3fc;line-height:1.6;white-space:pre-wrap;
+}
+
+.options{display:flex;flex-direction:column;gap:10px;}
+.option{
+  display:flex;align-items:flex-start;gap:12px;
+  background:var(--bg2);border:2px solid var(--border2);border-radius:10px;
+  padding:14px 16px;cursor:pointer;transition:all .2s;
+}
+.option:hover{background:var(--card2);border-color:rgba(201,168,76,0.3);}
+.option.selected{
+  background:var(--gold-dim);border-color:var(--gold);
+}
+.option.correct{background:rgba(52,211,153,0.1);border-color:var(--green)!important;}
+.option.wrong{background:rgba(248,113,113,0.1);border-color:var(--red)!important;}
+.opt-key{
+  width:26px;height:26px;border-radius:6px;flex-shrink:0;
+  border:1.5px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.78rem;font-weight:700;color:var(--t3);margin-top:1px;
+  transition:all .2s;
+}
+.option:hover .opt-key{border-color:var(--gold);color:var(--gold);}
+.option.selected .opt-key{background:var(--gold);border-color:var(--gold);color:#070b14;}
+.opt-text{font-size:.92rem;line-height:1.5;flex:1;}
+.opt-text code{
+  background:var(--bg);padding:1px 6px;border-radius:3px;
+  font-family:'Courier New',monospace;font-size:.82em;color:var(--blue);
+}
+
+/* ─── BOTTOM NAV ─── */
+.test-footer{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(7,11,20,0.95);backdrop-filter:blur(12px);
+  border-top:1px solid var(--border2);
+  padding:12px 24px;
+}
+.test-footer-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.nav-left,.nav-right{display:flex;gap:8px;}
+.q-answered-info{font-size:.82rem;color:var(--t3);}
+.q-answered-info strong{color:var(--gold);}
+
+/* ─── SIDEBAR ─── */
+.sidebar{position:sticky;top:92px;height:fit-content;}
+.sidebar-card{
+  background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:20px;margin-bottom:16px;
+}
+.sidebar-title{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--t3);font-weight:600;margin-bottom:14px;}
+.q-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
+.q-dot{
+  aspect-ratio:1;border-radius:5px;border:1px solid var(--border2);
+  background:var(--bg2);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;color:var(--t3);transition:all .15s;
+}
+.q-dot:hover{border-color:var(--gold);color:var(--gold);}
+.q-dot.answered{background:var(--gold-dim);border-color:rgba(201,168,76,0.4);color:var(--gold);}
+.q-dot.current{border-color:var(--gold);background:var(--gold-dim);outline:2px solid var(--gold);outline-offset:1px;}
+
+/* ─── REVIEW MODAL ─── */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(4px);
+  z-index:999;display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay.hidden{display:none;}
+.modal{
+  background:var(--card);border:1px solid var(--border);border-radius:20px;
+  padding:36px;max-width:480px;width:100%;
+  animation:fadeSlideIn .3s ease;
+}
+.modal h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:8px;}
+.modal p{color:var(--t2);font-size:.9rem;line-height:1.6;margin-bottom:24px;}
+.modal-unanswered{
+  background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);
+  border-radius:8px;padding:14px 16px;margin-bottom:24px;font-size:.88rem;color:var(--amber);
+}
+.modal-actions{display:flex;gap:10px;}
+
+/* ─── RESULTS SCREEN ─── */
+.results-wrap{max-width:760px;margin:0 auto;padding:40px 24px 80px;}
+.results-header{text-align:center;padding:48px 0 36px;border-bottom:1px solid var(--border2);margin-bottom:40px;}
+.results-header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:600;margin-bottom:8px;}
+.results-header p{color:var(--t2);}
+
+.score-hero{text-align:center;margin-bottom:48px;}
+.score-circle-wrap{position:relative;width:180px;height:180px;margin:0 auto 24px;}
+.score-svg{width:100%;height:100%;}
+.score-bg-circle{fill:none;stroke:var(--card2);stroke-width:8;}
+.score-arc{
+  fill:none;stroke-width:8;stroke-linecap:round;
+  transform:rotate(-90deg);transform-origin:50% 50%;
+  transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1);
+}
+.score-center{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.score-pct{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;line-height:1;}
+.score-raw{font-size:.8rem;color:var(--t3);margin-top:4px;}
+.score-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;margin-bottom:6px;}
+.score-info{font-size:.9rem;color:var(--t2);}
+
+.eligibility-card{
+  border-radius:16px;padding:28px 32px;margin-bottom:36px;
+  display:flex;align-items:flex-start;gap:20px;
+}
+.eligibility-card.admitted{background:rgba(52,211,153,0.08);border:2px solid rgba(52,211,153,0.4);}
+.eligibility-card.waitlist{background:rgba(251,191,36,0.08);border:2px solid rgba(251,191,36,0.3);}
+.eligibility-card.rejected{background:rgba(248,113,113,0.08);border:2px solid rgba(248,113,113,0.3);}
+.elig-icon{font-size:2.2rem;flex-shrink:0;}
+.elig-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;margin-bottom:6px;}
+.elig-desc{font-size:.9rem;color:var(--t2);line-height:1.6;}
+.admitted .elig-title{color:var(--green);}
+.waitlist .elig-title{color:var(--amber);}
+.rejected .elig-title{color:var(--red);}
+
+.section-breakdown{margin-bottom:36px;}
+.breakdown-title{
+  font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:20px;
+}
+.breakdown-item{
+  display:flex;align-items:center;gap:14px;margin-bottom:14px;
+}
+.breakdown-name{font-size:.85rem;font-weight:500;width:180px;flex-shrink:0;}
+.breakdown-bar-wrap{flex:1;height:8px;background:var(--bg2);border-radius:4px;overflow:hidden;}
+.breakdown-bar{height:100%;border-radius:4px;transition:width 1s ease .3s;}
+.breakdown-score{font-size:.85rem;font-weight:700;width:50px;text-align:right;flex-shrink:0;}
+
+.results-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+
+/* ─── LOADING ─── */
+.loading-screen{
+  position:fixed;inset:0;background:var(--bg);z-index:9999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+}
+.loading-screen.hidden{display:none;}
+.spinner{
+  width:48px;height:48px;border:3px solid var(--border2);
+  border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text{font-size:1rem;color:var(--t2);}
+
+/* ─── ERROR/SUCCESS TOAST ─── */
+.toast{
+  position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:12px 20px;font-size:.88rem;z-index:999;
+  animation:fadeSlideIn .3s ease;transition:opacity .3s;
+}
+.toast.hidden{opacity:0;pointer-events:none;}
+.toast.success{border-color:rgba(52,211,153,0.4);color:var(--green);}
+.toast.error{border-color:rgba(248,113,113,0.4);color:var(--red);}
+
+@media(max-width:600px){
+  .form-grid{grid-template-columns:1fr;}
+  .test-header-inner{flex-wrap:wrap;height:auto;padding:10px 0;}
+  .global-progress{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  LOADING SCREEN                                    -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="loading-screen hidden" id="loadingScreen">
+  <div class="logo-hex" style="width:52px;height:52px;font-size:1.2rem;">AI2</div>
+  <div class="spinner"></div>
+  <div class="loading-text" id="loadingText">Envoi en cours…</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  SCREEN 1: LANDING                                 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="screen-landing" class="screen active">
+  <div class="landing-wrap">
+
+    <div class="landing-top">
+      <div class="logo-mark">
+        <div class="logo-hex">AI2</div>
+        <span class="logo-name gold-text">Applied Institute of AI</span>
+      </div>
+      <span class="landing-year">Session 2025–2026</span>
+    </div>
+
+    <div class="landing-hero">
+      <div class="badge badge-gold" style="margin-bottom:20px;">🎓 Concours National d'Admission</div>
+      <h1>
+        <span class="gold-text">Master 2</span><br>
+        Data Science &amp; Intelligence Artificielle
+      </h1>
+      <p>Évaluation des connaissances en mathématiques avancées, machine learning, deep learning, Python scientifique et bases de données pour l'IA.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="val gold-text">30</div><div class="lbl">Questions</div></div>
+        <div class="hero-stat" style="width:1px;height:40px;background:var(--border2);"></div>
+        <div class="hero-stat"><div class="val gold-text">5</div><div class="lbl">Sections</div></div>
+        <div class="hero-stat" style="width:1px;height:40px;background:var(--border2);"></div>
+        <div class="hero-stat"><div class="val gold-text">2h</div><div class="lbl">Durée</div></div>
+        <div class="hero-stat" style="width:1px;height:40px;background:var(--border2);"></div>
+        <div class="hero-stat"><div class="val gold-text">30</div><div class="lbl">Points</div></div>
+      </div>
+    </div>
+
+    <!-- Candidate Info Form -->
+    <div class="info-card">
+      <h2>Informations du Candidat</h2>
+      <p>Ces informations sont nécessaires pour identifier votre dossier. Assurez-vous que votre adresse email est valide.</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nom *</label>
+          <input type="text" id="f-nom" placeholder="Votre nom de famille" required>
+        </div>
+        <div class="form-group">
+          <label>Prénom *</label>
+          <input type="text" id="f-prenom" placeholder="Votre prénom" required>
+        </div>
+        <div class="form-group">
+          <label>Adresse Email *</label>
+          <input type="email" id="f-email" placeholder="votre@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>Téléphone</label>
+          <input type="tel" id="f-phone" placeholder="+213 xx xx xx xx">
+        </div>
+        <div class="form-group full">
+          <label>Université / École d'origine *</label>
+          <input type="text" id="f-univ" placeholder="Ex: Université de Tlemcen, USTHB, ESI..." required>
+        </div>
+        <div class="form-group">
+          <label>Mention Master 1</label>
+          <select id="f-mention">
+            <option value="">-- Sélectionner --</option>
+            <option value="Très Bien">Très Bien (≥ 16/20)</option>
+            <option value="Bien">Bien (14–16/20)</option>
+            <option value="Assez Bien">Assez Bien (12–14/20)</option>
+            <option value="Passable">Passable (10–12/20)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Spécialité de Master 1</label>
+          <input type="text" id="f-specialite" placeholder="Ex: Informatique, Mathématiques...">
+        </div>
+      </div>
+    </div>
+
+    <!-- Sections Preview -->
+    <div class="info-card">
+      <h2>Contenu du Concours</h2>
+      <p>Le test couvre 5 domaines fondamentaux du Data Science et de l'Intelligence Artificielle au niveau Master 2.</p>
+      <div class="sections-preview">
+        <div class="section-preview-item">
+          <div class="section-preview-left">
+            <div class="section-dot" style="background:#c9a84c;"></div>
+            <div>
+              <div class="section-preview-name">Mathématiques &amp; Statistiques Avancées</div>
+              <div class="section-preview-meta">Algèbre linéaire, probabilités, estimation, optimisation</div>
+            </div>
+          </div>
+          <div class="section-preview-pts">8 questions</div>
+        </div>
+        <div class="section-preview-item">
+          <div class="section-preview-left">
+            <div class="section-dot" style="background:#4a9eff;"></div>
+            <div>
+              <div class="section-preview-name">Machine Learning Fondamental</div>
+              <div class="section-preview-meta">Biais-variance, algorithmes, métriques, sélection de modèles</div>
+            </div>
+          </div>
+          <div class="section-preview-pts">8 questions</div>
+        </div>
+        <div class="section-preview-item">
+          <div class="section-preview-left">
+            <div class="section-dot" style="background:#a78bfa;"></div>
+            <div>
+              <div class="section-preview-name">Deep Learning &amp; IA Générative</div>
+              <div class="section-preview-meta">Architectures, Transformers, LLM, modèles de diffusion</div>
+            </div>
+          </div>
+          <div class="section-preview-pts">6 questions</div>
+        </div>
+        <div class="section-preview-item">
+          <div class="section-preview-left">
+            <div class="section-dot" style="background:#34d399;"></div>
+            <div>
+              <div class="section-preview-name">Python &amp; Data Science</div>
+              <div class="section-preview-meta">scikit-learn, pandas, bonnes pratiques, pipelines ML</div>
+            </div>
+          </div>
+          <div class="section-preview-pts">4 questions</div>
+        </div>
+        <div class="section-preview-item">
+          <div class="section-preview-left">
+            <div class="section-dot" style="background:#f87171;"></div>
+            <div>
+              <div class="section-preview-name">SQL &amp; Bases de Données</div>
+              <div class="section-preview-meta">Requêtes avancées, indexation, architecture data</div>
+            </div>
+          </div>
+          <div class="section-preview-pts">4 questions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rules -->
+    <div class="info-card">
+      <h2>Règles &amp; Consignes</h2>
+      <p>Lisez attentivement les consignes avant de commencer.</p>
+      <div class="rules-grid">
+        <div class="rule-item"><div class="rule-icon">⏱</div><div class="rule-text"><strong>Durée : 2 heures</strong><span>Le test se soumet automatiquement à l'expiration du temps</span></div></div>
+        <div class="rule-item"><div class="rule-icon">✅</div><div class="rule-text"><strong>Une seule réponse</strong><span>Chaque question admet une unique bonne réponse</span></div></div>
+        <div class="rule-item"><div class="rule-icon">🔄</div><div class="rule-text"><strong>Révision libre</strong><span>Vous pouvez modifier vos réponses avant soumission</span></div></div>
+        <div class="rule-item"><div class="rule-icon">🚫</div><div class="rule-text"><strong>Sans aide extérieure</strong><span>Aucun accès à Internet ou documentation</span></div></div>
+        <div class="rule-item"><div class="rule-icon">💾</div><div class="rule-text"><strong>Sauvegarde auto</strong><span>Vos réponses sont sauvegardées localement</span></div></div>
+        <div class="rule-item"><div class="rule-icon">📊</div><div class="rule-text"><strong>Résultat immédiat</strong><span>Votre score et décision s'affichent à la soumission</span></div></div>
+      </div>
+    </div>
+
+    <div class="start-area">
+      <button class="btn btn-primary" style="font-size:1rem;padding:16px 48px;" onclick="startTest()">
+        Commencer le Concours &rarr;
+      </button>
+      <p>En cliquant, vous acceptez les conditions de participation et certifiez l'exactitude des informations fournies.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  SCREEN 2: TEST                                    -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="screen-test" class="screen">
+
+  <!-- Header -->
+  <div class="test-header">
+    <div class="test-header-inner">
+      <div class="test-logo">
+        <div class="logo-hex">AI2</div>
+        <span class="logo-name gold-text">M2 DS&amp;IA</span>
+      </div>
+      <div class="global-progress">
+        <div class="gp-top">
+          <span>Progression</span>
+          <span id="progressText">0 / 30</span>
+        </div>
+        <div class="gp-bar"><div class="gp-fill" id="progressFill" style="width:0%"></div></div>
+      </div>
+      <div class="timer-block" id="timerBlock">
+        <span class="timer-icon">⏱</span>
+        <span class="timer-value" id="timerDisplay">2:00:00</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section Tabs -->
+  <div class="section-tabs-wrap">
+    <div class="section-tabs" id="sectionTabs"></div>
+  </div>
+
+  <!-- Body -->
+  <div class="test-body">
+    <div class="question-panel">
+      <div class="q-header">
+        <div class="q-breadcrumb" id="qBreadcrumb"></div>
+        <div class="q-counter" id="qCounter"></div>
+      </div>
+      <div id="questionsContainer"></div>
+    </div>
+    <div class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-title">Navigation Rapide</div>
+        <div class="q-grid" id="qGrid"></div>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-title">Légende</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--t2);">
+            <div style="width:22px;height:22px;border-radius:5px;background:var(--gold-dim);border:1px solid rgba(201,168,76,0.4);"></div>Répondu
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--t2);">
+            <div style="width:22px;height:22px;border-radius:5px;background:var(--bg2);border:1px solid var(--border2);"></div>Non répondu
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--t2);">
+            <div style="width:22px;height:22px;border-radius:5px;background:var(--gold-dim);border:2px solid var(--gold);outline:2px solid var(--gold);outline-offset:1px;"></div>Actuel
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Nav -->
+  <div class="test-footer">
+    <div class="test-footer-inner">
+      <div class="nav-left">
+        <button class="btn btn-ghost" id="btnPrev" onclick="navigate(-1)">← Précédent</button>
+      </div>
+      <div class="q-answered-info">
+        <strong id="answeredCount">0</strong> / 30 répondues
+      </div>
+      <div class="nav-right">
+        <button class="btn btn-ghost" id="btnNext" onclick="navigate(1)">Suivant →</button>
+        <button class="btn btn-primary" id="btnSubmit" onclick="showSubmitModal()" style="display:none;">Soumettre ✓</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Submit Modal -->
+<div class="modal-overlay hidden" id="submitModal">
+  <div class="modal">
+    <h2>Soumettre le Concours ?</h2>
+    <p>Cette action est <strong>irréversible</strong>. Vérifiez que vous avez répondu à toutes les questions avant de confirmer.</p>
+    <div class="modal-unanswered hidden" id="unansweredWarning"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal()">← Retour</button>
+      <button class="btn btn-primary" style="flex:1" onclick="submitTest()">Confirmer la soumission</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!--  SCREEN 3: RESULTS                                 -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="screen-results" class="screen">
+  <div class="results-wrap">
+
+    <div class="results-header">
+      <div class="logo-mark" style="justify-content:center;margin-bottom:20px;">
+        <div class="logo-hex">AI2</div>
+        <span class="logo-name gold-text">Applied Institute of AI</span>
+      </div>
+      <h1>Résultats du Concours</h1>
+      <p id="resultSubtitle">Master 2 Data Science &amp; Intelligence Artificielle</p>
+    </div>
+
+    <!-- Score circle -->
+    <div class="score-hero">
+      <div class="score-circle-wrap">
+        <svg class="score-svg" viewBox="0 0 180 180">
+          <circle class="score-bg-circle" cx="90" cy="90" r="76"/>
+          <circle class="score-arc" id="scoreArc" cx="90" cy="90" r="76"
+                  stroke-dasharray="477.5" stroke-dashoffset="477.5"
+                  stroke="var(--gold)"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-pct gold-text" id="resultPct">0%</div>
+          <div class="score-raw" id="resultRaw">0/30</div>
+        </div>
+      </div>
+      <div class="score-name" id="resultName">—</div>
+      <div class="score-info" id="resultInfo">—</div>
+    </div>
+
+    <!-- Eligibility decision -->
+    <div class="eligibility-card" id="eligCard">
+      <div class="elig-icon" id="eligIcon"></div>
+      <div>
+        <div class="elig-title" id="eligTitle"></div>
+        <div class="elig-desc" id="eligDesc"></div>
+      </div>
+    </div>
+
+    <!-- Section breakdown -->
+    <div class="section-breakdown">
+      <h3 class="breakdown-title">Détail par section</h3>
+      <div id="breakdownItems"></div>
+    </div>
+
+    <!-- Actions -->
+    <div class="results-actions">
+      <button class="btn btn-ghost" onclick="window.print()">🖨 Imprimer le résultat</button>
+      <button class="btn btn-primary" onclick="location.reload()">Nouveau test ↺</button>
+    </div>
+
+    <div style="text-align:center;margin-top:32px;padding-top:24px;border-top:1px solid var(--border2);">
+      <p style="font-size:.8rem;color:var(--t3);">AI2 — Applied Institute of Artificial Intelligence · Concours National Session 2025–2026</p>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast hidden" id="toast"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<script>
+/* ══════════════════════════════════════════════════
+   ⚙️  CONFIGURATION — SUPABASE
+   Remplacez ces valeurs avec vos credentials Supabase
+   Voir instructions de déploiement dans README
+   ══════════════════════════════════════════════════ */
+const SUPABASE_URL = "https://VOTRE_ID.supabase.co";
+const SUPABASE_ANON_KEY = "VOTRE_ANON_KEY";
+const TABLE_NAME = "candidates";
+/* ══════════════════════════════════════════════════ */
+
+/* ─── SECTIONS ─── */
+const SECTIONS = [
+  {id:0,name:"Mathématiques & Statistiques",short:"Maths",color:"#c9a84c",count:8},
+  {id:1,name:"Machine Learning",short:"ML",color:"#4a9eff",count:8},
+  {id:2,name:"Deep Learning & IA",short:"DL/IA",color:"#a78bfa",count:6},
+  {id:3,name:"Python & Data Science",short:"Python",color:"#34d399",count:4},
+  {id:4,name:"SQL & Bases de Données",short:"SQL",color:"#f87171",count:4},
+];
+
+/* ─── QUESTIONS ─── */
+const QUESTIONS = [
+  // ── SECTION 0: MATHS & STATS ──
+  {id:0,s:0,
+   text:"Soit une matrice A (n×n) symétrique définie positive. Quelle propriété est <strong>toujours</strong> vraie ?",
+   opts:["det(A) = 0","Toutes les valeurs propres de A sont strictement positives","A est nécessairement orthogonale","A n'est pas inversible"],
+   correct:1},
+  {id:1,s:0,
+   text:"La décomposition SVD d'une matrice A (m×n) s'écrit A = UΣVᵀ. Quelle affirmation est <strong>correcte</strong> ?",
+   opts:["Les colonnes de U sont les vecteurs propres de AAᵀ","Σ est une matrice carrée n×n pleine","Les valeurs singulières peuvent être négatives","V est une matrice m×n non carrée"],
+   correct:0},
+  {id:2,s:0,
+   text:"Régularisation L1 (Lasso) vs L2 (Ridge) : quelle affirmation est <strong>correcte</strong> ?",
+   opts:["Ridge produit des solutions sparse (coefficients nuls), Lasso non","Lasso produit des solutions sparse ; Ridge réduit les coefficients sans les annuler","Les deux méthodes donnent exactement les mêmes résultats","Ridge est toujours moins performant que Lasso"],
+   correct:1},
+  {id:3,s:0,
+   text:"L'estimateur MLE de σ² pour une distribution normale (diviseur n, pas n−1) est :",
+   opts:["Biaisé mais consistant","Non biaisé et consistant","Biaisé et inconsistant","Non biaisé mais inconsistant"],
+   correct:0},
+  {id:4,s:0,
+   text:"La divergence de Kullback-Leibler KL(P ‖ Q) :",
+   opts:["Est toujours symétrique : KL(P‖Q) = KL(Q‖P)","Est toujours ≥ 0, et = 0 ssi P = Q (inégalité de Gibbs)","Est une distance métrique au sens strict","N'est pas définie quand les supports de P et Q se chevauchent"],
+   correct:1},
+  {id:5,s:0,
+   text:"L'intervalle de confiance à 95% pour μ avec n observations i.i.d. de loi N(μ, σ²) <em>connue</em> est :",
+   opts:["μ ± σ/√n","X̄ ± 1.96 · σ/√n","X̄ ± 2.58 · σ/√n","X̄ ± 1.64 · σ/√n"],
+   correct:1},
+  {id:6,s:0,
+   text:"L'optimiseur <strong>Adam</strong> combine :",
+   opts:["SGD avec momentum uniquement","RMSProp et SGD classique","Moments du 1er ordre (momentum) et du 2ème ordre (variance adaptative) des gradients","Gradient clipping et learning rate fixe"],
+   correct:2},
+  {id:7,s:0,
+   text:"Une p-value de <strong>0.03</strong> avec un seuil α = 0.05 signifie :",
+   opts:["On rejette H₀ ; P(observer ce résultat | H₀ vraie) = 3%","La probabilité que H₁ soit vraie est 97%","On accepte H₀ avec 95% de confiance","L'effet est forcément d'importance pratique significative"],
+   correct:0},
+
+  // ── SECTION 1: MACHINE LEARNING ──
+  {id:8,s:1,
+   text:"Dans le compromis <strong>biais-variance</strong>, augmenter la complexité du modèle :",
+   opts:["Réduit le biais et réduit la variance","Réduit le biais et augmente la variance","Augmente le biais et réduit la variance","N'affecte que le biais, pas la variance"],
+   correct:1},
+  {id:9,s:1,
+   text:"Le <strong>Gradient Boosting</strong> (XGBoost, LightGBM) se distingue du Random Forest car :",
+   opts:["Il entraîne les arbres en parallèle sur des sous-ensembles aléatoires","Chaque arbre corrige séquentiellement les résidus du précédent","Il utilise uniquement des stumps (arbres de profondeur 1)","Il ne réalise ni bagging ni échantillonnage de features"],
+   correct:1},
+  {id:10,s:1,
+   text:"Une <strong>AUC-ROC = 0.5</strong> pour un classificateur binaire indique :",
+   opts:["Le classificateur est parfait","Performance équivalente à une prédiction aléatoire","Le classificateur prédit toujours la classe majoritaire","50% d'accuracy sur toutes les classes"],
+   correct:1},
+  {id:11,s:1,
+   text:"La régularisation L1 (Lasso) produit des solutions <strong>sparse</strong> car :",
+   opts:["Elle pénalise les coefficients de manière quadratique","La géométrie de la contrainte L1 favorise les coins du polytope (coefficients = 0)","Elle est numériquement plus stable que L2","Elle utilise une norme euclidienne au carré"],
+   correct:1},
+  {id:12,s:1,
+   text:"Dans une SVM, le <strong>kernel trick</strong> permet de :",
+   opts:["Réduire le temps d'entraînement par des approximations stochastiques","Gérer automatiquement les données déséquilibrées","Calculer implicitement des produits scalaires dans un espace de haute dimension","Éliminer le besoin de vecteurs supports"],
+   correct:2},
+  {id:13,s:1,
+   text:"Pour un dataset très déséquilibré (classe positive = 1%), la stratégie la plus pertinente est :",
+   opts:["Maximiser l'accuracy (déjà >99% sans entraînement)","SMOTE + utiliser F1-score ou AUC-ROC comme métriques","Supprimer les exemples de la classe minoritaire pour équilibrer","Augmenter drastiquement le learning rate"],
+   correct:1},
+  {id:14,s:1,
+   text:"La <strong>validation croisée k-fold stratifiée</strong> est préférable à la k-fold classique quand :",
+   opts:["Le dataset contient plus d'un million d'observations","Le dataset est déséquilibré — elle préserve les proportions de classes dans chaque fold","On travaille sur un problème de régression","Le modèle est un réseau de neurones profond"],
+   correct:1},
+  {id:15,s:1,
+   text:"L'importance des features dans un <strong>Random Forest</strong> est calculée comme :",
+   opts:["La réduction moyenne de l'impureté (Gini/entropie) causée par la feature sur tous les arbres","La corrélation de Pearson entre la feature et la variable cible","Le coefficient de régression linéaire associé à la feature","La p-value du test de Student pour chaque feature"],
+   correct:0},
+
+  // ── SECTION 2: DEEP LEARNING & IA ──
+  {id:16,s:2,
+   text:"Le problème du <strong>vanishing gradient</strong> affecte les réseaux profonds car :",
+   opts:["Les gradients augmentent exponentiellement couche par couche","Les gradients se multiplient par des valeurs < 1 à chaque couche, tendant vers 0","Les activations ReLU bloquent systématiquement le gradient","L'initialisation des poids est toujours trop grande"],
+   correct:1},
+  {id:17,s:2,
+   text:"Le mécanisme d'<strong>attention</strong> dans les Transformers calcule :",
+   opts:["Attention(Q,K,V) = softmax(QKᵀ/√d_k)·V","Attention(Q,K,V) = sigmoid(QKᵀ)·V","Attention(Q,K,V) = max(QKᵀ)·V","Attention(Q,K,V) = tanh(QKᵀ/d_k)·V"],
+   correct:0},
+  {id:18,s:2,
+   text:"Le <strong>Dropout</strong> en Deep Learning agit comme régularisation car :",
+   opts:["Il normalise les activations pour chaque mini-batch","Il force le réseau à apprendre des représentations redondantes et robustes","Il réduit adaptivement le learning rate","Il initialise les poids de manière orthogonale"],
+   correct:1},
+  {id:19,s:2,
+   text:"La <strong>Batch Normalization</strong> résout principalement :",
+   opts:["L'overfitting sévère sur les petits datasets","Le covariate shift interne, en stabilisant la distribution des activations entre couches","Le vanishing gradient exclusivement dans les RNN","L'explosion du gradient dans les CNN uniquement"],
+   correct:1},
+  {id:20,s:2,
+   text:"Dans les <strong>modèles de diffusion génératifs</strong> (Stable Diffusion, DALL·E 3), l'entraînement apprend à :",
+   opts:["Générer des images directement depuis un vecteur aléatoire (comme un GAN)","Débruiter une image à laquelle on a progressivement ajouté du bruit gaussien","Encoder des images dans un espace latent discret (VQ-VAE)","Prédire des pixels masqués (comme MAE)"],
+   correct:1},
+  {id:21,s:2,
+   text:"Le fine-tuning <strong>LoRA</strong> (Low-Rank Adaptation) d'un LLM consiste à :",
+   opts:["Réentraîner tous les paramètres du modèle sur le nouveau dataset","Entraîner uniquement des matrices de rang bas ajoutées aux couches gelées du modèle","Distiller le modèle en une version plus compacte","Quantifier les poids en 4 bits pour la compression"],
+   correct:1},
+
+  // ── SECTION 3: PYTHON & DATA SCIENCE ──
+  {id:22,s:3,
+   text:"Dans ce code sklearn, quel est le <strong>problème</strong> ?<div class='q-code-block'>scaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\nX_train, X_test = train_test_split(X_scaled, test_size=0.2)</div>",
+   opts:["StandardScaler ne s'applique pas aux données continues","Data leakage : les statistiques du jeu de test influencent la normalisation","train_test_split ne supporte pas les données normalisées en entrée","Il n'y a aucun problème dans ce code"],
+   correct:1},
+  {id:23,s:3,
+   text:"<code>PCA(n_components=0.95).fit_transform(X)</code> dans scikit-learn :",
+   opts:["Réduit à exactement 95 composantes","Conserve le minimum de composantes expliquant ≥ 95% de la variance totale","Réduit à 5% du nombre de features originales","Lève une erreur car n_components attend un entier"],
+   correct:1},
+  {id:24,s:3,
+   text:"Pour accéder aux importances de features d'un <code>RandomForestClassifier</code> entraîné :",
+   opts:["model.feature_importances_","model.coef_","model.get_feature_importance()","sklearn.inspection.feature_importance(model)"],
+   correct:0},
+  {id:25,s:3,
+   text:"Pour opérer sur un DataFrame pandas de <strong>grande taille</strong> (>10M lignes), quelle approche est la <strong>plus performante</strong> ?",
+   opts:["df.apply(func, axis=1) — toujours le meilleur choix","Vectorisation numpy/pandas directe sur les colonnes (opérations en C compilé)","df.iterrows() avec une boucle Python for","df.map(func) appliqué au DataFrame entier"],
+   correct:1},
+
+  // ── SECTION 4: SQL & BDD ──
+  {id:26,s:4,
+   text:"Quelle requête SQL retourne correctement le <strong>2ème salaire le plus élevé</strong> ?",
+   opts:["SELECT MAX(salary) FROM employees WHERE salary < (SELECT MAX(salary) FROM employees)","SELECT salary FROM employees ORDER BY salary DESC LIMIT 1 OFFSET 1","SELECT SECOND(salary) FROM employees","SELECT salary FROM employees WHERE ROWNUM = 2"],
+   correct:0},
+  {id:27,s:4,
+   text:"La différence fondamentale entre <strong>INNER JOIN</strong> et <strong>LEFT JOIN</strong> :",
+   opts:["Il n'y a aucune différence en pratique","LEFT JOIN inclut toutes les lignes de la table gauche, même sans correspondance (NULL côté droit)","INNER JOIN est toujours plus rapide que LEFT JOIN","LEFT JOIN ne retourne que les lignes sans correspondance"],
+   correct:1},
+  {id:28,s:4,
+   text:"Un <strong>index B-tree</strong> est le plus efficace pour :",
+   opts:["Des colonnes booléennes (très faible cardinalité)","Des requêtes de type range/égalité sur des colonnes à haute cardinalité","Les opérations INSERT massives en batch","Des colonnes de type TEXT très long"],
+   correct:1},
+  {id:29,s:4,
+   text:"Dans une architecture Data/MLOps, un <strong>Feature Store</strong> permet de :",
+   opts:["Stocker uniquement les données brutes non transformées","Centraliser, versionner et réutiliser des features entre projets ML (serving online/offline)","Remplacer entièrement le Data Warehouse","Effectuer exclusivement du feature engineering en temps réel"],
+   correct:1},
+];
+
+/* ─── STATE ─── */
+let state = {
+  currentQ: 0,
+  answers: new Array(30).fill(null),
+  startTime: null,
+  candidateInfo: {},
+  timerInterval: null,
+  secondsLeft: 7200,
+};
+
+/* ─── UTILITIES ─── */
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function showToast(msg,type='success'){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.className=`toast ${type}`;
+  setTimeout(()=>t.classList.add('hidden'),3000);
+}
+
+function formatTime(s){
+  const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),ss=s%60;
+  return `${h}:${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
+}
+
+/* ─── VALIDATION & START ─── */
+function startTest(){
+  const nom=document.getElementById('f-nom').value.trim();
+  const prenom=document.getElementById('f-prenom').value.trim();
+  const email=document.getElementById('f-email').value.trim();
+  const univ=document.getElementById('f-univ').value.trim();
+  if(!nom||!prenom||!email||!univ){
+    showToast('Veuillez remplir tous les champs obligatoires (*)','error');return;
+  }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    showToast('Email invalide','error');return;
+  }
+  state.candidateInfo={nom,prenom,email,
+    phone:document.getElementById('f-phone').value.trim(),
+    universite:univ,
+    mention:document.getElementById('f-mention').value,
+    specialite:document.getElementById('f-specialite').value.trim()
+  };
+  state.startTime=Date.now();
+  // Restore from localStorage if available
+  const saved=localStorage.getItem('ai2_answers');
+  if(saved){
+    try{const a=JSON.parse(saved);if(Array.isArray(a)&&a.length===30)state.answers=a;}catch(e){}
+  }
+  showScreen('screen-test');
+  buildTestUI();
+  startTimer();
+}
+
+/* ─── TIMER ─── */
+function startTimer(){
+  const saved=localStorage.getItem('ai2_timer');
+  if(saved){const s=parseInt(saved);if(!isNaN(s)&&s>0&&s<=7200)state.secondsLeft=s;}
+  updateTimerDisplay();
+  state.timerInterval=setInterval(()=>{
+    state.secondsLeft--;
+    localStorage.setItem('ai2_timer',state.secondsLeft);
+    updateTimerDisplay();
+    if(state.secondsLeft<=0){clearInterval(state.timerInterval);submitTest(true);}
+  },1000);
+}
+
+function updateTimerDisplay(){
+  const el=document.getElementById('timerDisplay');
+  const block=document.getElementById('timerBlock');
+  if(!el)return;
+  el.textContent=formatTime(state.secondsLeft);
+  if(state.secondsLeft<=300)block.classList.add('danger');
+}
+
+/* ─── BUILD UI ─── */
+function buildTestUI(){
+  buildSectionTabs();
+  buildQGrid();
+  renderQuestion(0);
+}
+
+function buildSectionTabs(){
+  const wrap=document.getElementById('sectionTabs');
+  wrap.innerHTML='';
+  let qOffset=0;
+  SECTIONS.forEach(sec=>{
+    const tab=document.createElement('div');
+    tab.className='sec-tab';
+    tab.dataset.secid=sec.id;
+    tab.dataset.firstq=qOffset;
+    tab.innerHTML=`<div class="sec-tab-num" id="secNum${sec.id}">${sec.id+1}</div><span>${sec.short}</span>`;
+    tab.addEventListener('click',()=>navigateToSection(sec.id));
+    wrap.appendChild(tab);
+    qOffset+=sec.count;
+  });
+  updateSectionTabs();
+}
+
+function buildQGrid(){
+  const grid=document.getElementById('qGrid');
+  grid.innerHTML='';
+  QUESTIONS.forEach((q,i)=>{
+    const d=document.createElement('div');
+    d.className='q-dot';
+    d.dataset.qi=i;
+    d.textContent=i+1;
+    d.title=`Question ${i+1}`;
+    d.addEventListener('click',()=>renderQuestion(i));
+    grid.appendChild(d);
+  });
+  updateQGrid();
+}
+
+function updateQGrid(){
+  document.querySelectorAll('.q-dot').forEach((d,i)=>{
+    d.className='q-dot';
+    if(state.answers[i]!==null)d.classList.add('answered');
+    if(i===state.currentQ)d.classList.add('current');
+  });
+}
+
+function updateSectionTabs(){
+  let offset=0;
+  SECTIONS.forEach(sec=>{
+    const tab=document.querySelector(`.sec-tab[data-secid="${sec.id}"]`);
+    if(!tab)return;
+    tab.classList.remove('active','done');
+    const qStart=offset,qEnd=offset+sec.count-1;
+    const inSection=state.currentQ>=qStart&&state.currentQ<=qEnd;
+    const allDone=state.answers.slice(qStart,qStart+sec.count).every(a=>a!==null);
+    if(inSection)tab.classList.add('active');
+    else if(allDone)tab.classList.add('done');
+    offset+=sec.count;
+  });
+}
+
+function renderQuestion(index){
+  state.currentQ=index;
+  const q=QUESTIONS[index];
+  const sec=SECTIONS[q.s];
+  // breadcrumb
+  document.getElementById('qBreadcrumb').textContent=sec.name;
+  let secOffset=0;for(let i=0;i<q.s;i++)secOffset+=SECTIONS[i].count;
+  const qInSec=index-secOffset+1;
+  document.getElementById('qCounter').textContent=`Q${qInSec}/${sec.count} de la section`;
+  // render question card
+  const container=document.getElementById('questionsContainer');
+  container.innerHTML=`
+    <div class="q-section-label" style="background:${sec.color}20;color:${sec.color};border:1px solid ${sec.color}40;">
+      ${sec.name}
+    </div>
+    <div class="q-card">
+      <div class="q-number">Question ${index+1} sur 30</div>
+      <div class="q-text">${q.text}</div>
+      <div class="options" id="optionsList"></div>
+    </div>`;
+  const optList=document.getElementById('optionsList');
+  q.opts.forEach((opt,oi)=>{
+    const div=document.createElement('div');
+    div.className='option'+(state.answers[index]===oi?' selected':'');
+    div.innerHTML=`<div class="opt-key">${String.fromCharCode(65+oi)}</div><div class="opt-text">${opt}</div>`;
+    div.addEventListener('click',()=>selectAnswer(index,oi));
+    optList.appendChild(div);
+  });
+  updateNavButtons();
+  updateQGrid();
+  updateSectionTabs();
+  updateProgress();
+}
+
+function selectAnswer(qIndex,optIndex){
+  state.answers[qIndex]=optIndex;
+  localStorage.setItem('ai2_answers',JSON.stringify(state.answers));
+  // re-render options highlight
+  document.querySelectorAll('.option').forEach((o,i)=>{
+    o.classList.toggle('selected',i===optIndex);
+  });
+  updateProgress();
+  updateQGrid();
+}
+
+function updateProgress(){
+  const answered=state.answers.filter(a=>a!==null).length;
+  document.getElementById('answeredCount').textContent=answered;
+  document.getElementById('progressText').textContent=`${answered} / 30`;
+  document.getElementById('progressFill').style.width=`${(answered/30)*100}%`;
+  const submitBtn=document.getElementById('btnSubmit');
+  const nextBtn=document.getElementById('btnNext');
+  if(answered===30){submitBtn.style.display='flex';nextBtn.style.display='none';}
+  else{submitBtn.style.display='none';nextBtn.style.display='flex';}
+}
+
+function updateNavButtons(){
+  document.getElementById('btnPrev').disabled=state.currentQ===0;
+  document.getElementById('btnNext').disabled=state.currentQ===QUESTIONS.length-1;
+}
+
+function navigate(dir){
+  const next=state.currentQ+dir;
+  if(next>=0&&next<QUESTIONS.length)renderQuestion(next);
+}
+
+function navigateToSection(secId){
+  let offset=0;
+  for(let i=0;i<secId;i++)offset+=SECTIONS[i].count;
+  renderQuestion(offset);
+}
+
+/* ─── SUBMIT MODAL ─── */
+function showSubmitModal(){
+  const unanswered=state.answers.reduce((acc,a,i)=>a===null?[...acc,i+1]:acc,[]);
+  const warn=document.getElementById('unansweredWarning');
+  if(unanswered.length>0){
+    warn.classList.remove('hidden');
+    warn.innerHTML=`⚠️ <strong>${unanswered.length} question(s) sans réponse :</strong> ${unanswered.join(', ')}`;
+  }else{
+    warn.classList.add('hidden');
+  }
+  document.getElementById('submitModal').classList.remove('hidden');
+}
+
+function closeModal(){
+  document.getElementById('submitModal').classList.add('hidden');
+}
+
+/* ─── SCORING ─── */
+function calculateScores(){
+  let bySection=SECTIONS.map(()=>({score:0,total:0}));
+  QUESTIONS.forEach((q,i)=>{
+    bySection[q.s].total++;
+    if(state.answers[i]===q.correct)bySection[q.s].score++;
+  });
+  const total=bySection.reduce((a,s)=>a+s.score,0);
+  const pct=Math.round((total/30)*100);
+  return{bySection,total,pct};
+}
+
+function getEligibility(pct){
+  if(pct>=80)return{
+    cls:'admitted',icon:'🎓',
+    title:'Admis(e) en Admission Directe',
+    desc:`Félicitations ! Votre score exceptionnel de ${pct}% (≥ 80%) vous qualifie pour une admission directe en Master 2 Data Science & IA à l'AI2. Vous recevrez une convocation officielle par email sous 5 jours ouvrables.`
+  };
+  if(pct>=60)return{
+    cls:'waitlist',icon:'📋',
+    title:'Liste Complémentaire — Entretien Requis',
+    desc:`Votre score de ${pct}% (60–79%) vous place sur la liste complémentaire. Un entretien de motivation et de compétences vous sera proposé. Préparez votre CV, lettre de motivation et un projet académique personnel.`
+  };
+  return{
+    cls:'rejected',icon:'📌',
+    title:'Non Admissible en Admission Directe',
+    desc:`Votre score de ${pct}% est inférieur au seuil requis (60%). Nous vous encourageons à renforcer vos bases en Machine Learning, Deep Learning et Mathématiques appliquées. Vous pouvez vous représenter à la prochaine session.`
+  };
+}
+
+/* ─── SUBMIT ─── */
+async function submitTest(auto=false){
+  closeModal();
+  clearInterval(state.timerInterval);
+  const timeTaken=7200-state.secondsLeft;
+  const{bySection,total,pct}=calculateScores();
+  const elig=getEligibility(pct);
+  // Show loading
+  document.getElementById('loadingScreen').classList.remove('hidden');
+  document.getElementById('loadingText').textContent='Enregistrement de votre résultat…';
+  // Build payload
+  const payload={
+    nom:state.candidateInfo.nom,
+    prenom:state.candidateInfo.prenom,
+    email:state.candidateInfo.email,
+    phone:state.candidateInfo.phone||null,
+    universite:state.candidateInfo.universite,
+    mention_m1:state.candidateInfo.mention||null,
+    specialite:state.candidateInfo.specialite||null,
+    score_math:bySection[0].score,
+    score_ml:bySection[1].score,
+    score_dl:bySection[2].score,
+    score_python:bySection[3].score,
+    score_sql:bySection[4].score,
+    total_score:total,
+    max_score:30,
+    percentage:pct,
+    eligibility:elig.title,
+    answers:JSON.stringify(state.answers),
+    time_taken:timeTaken
+  };
+  // Send to Supabase
+  try{
+    if(SUPABASE_URL!=="https://VOTRE_ID.supabase.co"){
+      const res=await fetch(`${SUPABASE_URL}/rest/v1/${TABLE_NAME}`,{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          'apikey':SUPABASE_ANON_KEY,
+          'Authorization':`Bearer ${SUPABASE_ANON_KEY}`,
+          'Prefer':'return=minimal'
+        },
+        body:JSON.stringify(payload)
+      });
+      if(!res.ok)throw new Error(`Supabase error: ${res.status}`);
+    }
+  }catch(e){
+    console.warn('Supabase submit failed (non-blocking):',e.message);
+    // Still show results even if DB fails
+  }
+  // Clear localStorage
+  localStorage.removeItem('ai2_answers');
+  localStorage.removeItem('ai2_timer');
+  // Show results
+  document.getElementById('loadingScreen').classList.add('hidden');
+  showResults({bySection,total,pct,elig,auto});
+}
+
+/* ─── SHOW RESULTS ─── */
+function showResults({bySection,total,pct,elig,auto}){
+  showScreen('screen-results');
+  const{nom,prenom}=state.candidateInfo;
+  document.getElementById('resultName').textContent=`${prenom} ${nom}`;
+  document.getElementById('resultInfo').textContent=`${state.candidateInfo.universite} · ${new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'})}`;
+  // Animate score circle
+  setTimeout(()=>{
+    const arc=document.getElementById('scoreArc');
+    const circumference=477.5;
+    const offset=circumference-(pct/100)*circumference;
+    arc.style.strokeDashoffset=offset;
+    // Color based on score
+    if(pct>=80)arc.style.stroke='var(--green)';
+    else if(pct>=60)arc.style.stroke='var(--amber)';
+    else arc.style.stroke='var(--red)';
+    // Animate percentage text
+    let current=0;
+    const step=Math.ceil(pct/60);
+    const interval=setInterval(()=>{
+      current=Math.min(current+step,pct);
+      document.getElementById('resultPct').textContent=`${current}%`;
+      if(current>=pct)clearInterval(interval);
+    },25);
+    document.getElementById('resultRaw').textContent=`${total}/30`;
+  },300);
+  // Eligibility card
+  const card=document.getElementById('eligCard');
+  card.className=`eligibility-card ${elig.cls}`;
+  document.getElementById('eligIcon').textContent=elig.icon;
+  document.getElementById('eligTitle').textContent=elig.title;
+  document.getElementById('eligDesc').textContent=elig.desc;
+  // Section breakdown
+  const bContainer=document.getElementById('breakdownItems');
+  bContainer.innerHTML='';
+  SECTIONS.forEach((sec,i)=>{
+    const secPct=Math.round((bySection[i].score/sec.count)*100);
+    bContainer.innerHTML+=`
+      <div class="breakdown-item">
+        <div class="breakdown-name" style="color:${sec.color}">${sec.short}</div>
+        <div class="breakdown-bar-wrap">
+          <div class="breakdown-bar" style="width:0%;background:${sec.color}" data-width="${secPct}"></div>
+        </div>
+        <div class="breakdown-score" style="color:${sec.color}">${bySection[i].score}/${sec.count}</div>
+      </div>`;
+  });
+  // Animate bars
+  setTimeout(()=>{
+    document.querySelectorAll('.breakdown-bar').forEach(b=>{
+      b.style.width=b.dataset.width+'%';
+    });
+  },500);
+  if(auto)showToast('⏱ Temps écoulé — test soumis automatiquement','error');
+}
+</script>
+</body>
+</html>
